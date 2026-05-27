@@ -3,14 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-import RoadmapSection from './RoadmapSection';
 import LearningRoadmap from './LearningRoadmap';
 import JobMarketInsights from './JobMarketInsights';
-import SkillGapChart from './SkillGapChart';
 import { injectTheme } from './theme';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
-
 const skillsList = [
   'Database Fundamentals', 'Computer Architecture', 'Distributed Computing Systems',
   'Cyber Security', 'Networking', 'Software Development', 'Programming Skills',
@@ -71,16 +68,7 @@ function PredictionForm({ user }) {
       pointBackgroundColor: '#7c6bff',
       pointBorderColor: '#050816',
     }];
-    if (gapData) datasets.push({
-      label: `Ideal ${prediction} Profile`,
-      data: gapData.ideal,
-      backgroundColor: 'rgba(0,229,200,0.12)',
-      borderColor: '#00e5c8',
-      borderWidth: 2,
-      borderDash: [5, 5],
-      pointBackgroundColor: '#00e5c8',
-      pointBorderColor: '#050816',
-    });
+    
     return { labels: skillsList, datasets };
   }, [formData, gapData, prediction]);
 
@@ -139,13 +127,16 @@ function PredictionForm({ user }) {
             </form>
           </div>
 
-          <div className="t-card" style={{ position: 'sticky', top: '5rem', alignSelf: 'start' }}>
-            <div className="t-card-title">Skill Profile Visualization</div>
-            <div style={{ width: '100%', height: '420px' }}>
+          {/* Radar Chart Column */}
+          <div className="t-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: '400px' }}>
+            <div className="t-card-title">Skill Analysis Chart</div>
+            <div style={{ position: 'relative', flex: 1, minHeight: '350px' }}>
               <Radar data={chartData} options={chartOptions} />
             </div>
           </div>
+
         </div>
+
         {prediction && (
           <>
             <div className="t-card t-mt3" style={{ borderColor: 'rgba(0,229,200,.3)' }}>
@@ -182,4 +173,5 @@ function PredictionForm({ user }) {
     </div>
   );
 }
+
 export default PredictionForm;

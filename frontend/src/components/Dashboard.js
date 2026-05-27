@@ -387,9 +387,9 @@ const TOOLS = [
 
 const STATS = [
   { num: '17+', label: 'Skills Analyzed', icon: <FaStar /> },
-  { num: '8',   label: 'Career Tools',    icon: <FaRocket /> },
-  { num: '7+',  label: 'Countries',       icon: <FaUsers /> },
-  { num: '99%', label: 'Accuracy',        icon: <FaTrophy /> },
+  { num: '8', label: 'Career Tools', icon: <FaRocket /> },
+  { num: '7+', label: 'Countries', icon: <FaUsers /> },
+  { num: '99%', label: 'Accuracy', icon: <FaTrophy /> },
 ];
 
 function StarCanvas() {
@@ -432,7 +432,7 @@ function ToolCard({ tool, locked = false }) {
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
-    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
+    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%';
     ref.current.style.setProperty('--mx', x);
     ref.current.style.setProperty('--my', y);
   };
@@ -472,7 +472,7 @@ function Dashboard({ user }) {
     el.id = 'cai-styles';
     el.textContent = STYLES;
     document.head.appendChild(el);
-    return () => {};
+    return () => { };
   }, []);
 
   if (!user) {
@@ -530,7 +530,7 @@ function Dashboard({ user }) {
         </div>
 
         <div className="cai-footer">
-          <p>© {new Date().getFullYear()} AICareer Pro — Built by Vaibhav Agarwal · <a href="/login">Login</a> · <a href="/signup">Sign Up</a></p>
+          <p>© {new Date().getFullYear()} AICareer Pro — Sparsh Shankhdhar · <a href="/login">Login</a> · <a href="/signup">Sign Up</a></p>
         </div>
       </div>
     );

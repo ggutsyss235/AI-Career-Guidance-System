@@ -191,7 +191,7 @@ function ContactUs() {
           </form>
 
           <div className="con-footer-note">
-            <p>Or email us directly at <a href="mailto:vaibhavwork478@gmail.com">vaibhavwork478@gmail.com</a></p>
+            <p>Or email us directly at <a href="mailto:codeforsparsh25@gmail.com">codeforsparsh25@gmail.com</a></p>
           </div>
         </div>
       </div>

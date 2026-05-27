@@ -145,8 +145,8 @@ body {
   left: 50%;
   transform: translateX(-50%) scaleX(0);
   width: 60%;
-  height: 2px;
-  border-radius: 1px;
+  height: 20px;
+  border-radius: 10px;
   background: linear-gradient(90deg, var(--brand-purple), var(--brand-cyan));
   transition: transform 0.25s ease;
 }
@@ -194,7 +194,7 @@ body {
 .app-navbar__welcome-dot {
   width: 7px;
   height: 7px;
-  border-radius: 50%;
+  border-radius: 100%;
   background: var(--brand-cyan);
   flex-shrink: 0;
   box-shadow: 0 0 6px var(--brand-cyan);
@@ -208,7 +208,7 @@ body {
 
 .app-navbar__btn {
   padding: 0.38rem 1rem;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
@@ -286,10 +286,10 @@ body {
 .app-navbar__drawer {
   display: none;
   flex-direction: column;
-  padding: 0.5rem 1rem 1rem;
-  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 1rem 1rem 1rem;
+  border-top: 10px solid rgba(255,255,255,.06);
   background: rgba(6, 4, 16, 0.97);
-  gap: 2px;
+  gap: 20px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
@@ -370,7 +370,7 @@ textarea, select {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.4s, box-shadow 0.4s;
 }
 
 .form-control:focus, .form-select:focus,

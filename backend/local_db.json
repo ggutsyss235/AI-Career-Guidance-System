@@ -1,0 +1,47 @@
+{
+    "users": [
+        {
+            "name": "Sparsh",
+            "email": "sparsh@example.com",
+            "password": "$2b$12$9XKAaiZFax4ssOEFSa51HO7jQLSazwOvRbhL5JxS0lXgKlSgeHa6W",
+            "_id": "603435"
+        },
+        {
+            "name": "Test User",
+            "email": "test@example.com",
+            "password": "$2b$12$Sy7rOnTQgZVx0sNNdMAUPu51vuzf/3WZbnSRoD7./B8hxsMU91/D6",
+            "_id": "741121"
+        },
+        {
+            "name": "Sparsh Shankhdhar",
+            "email": "codeforsparsh512@gmail.com",
+            "password": "$2b$12$yJElmAo0HR36ajAZOumtX.xk.MSvvnye6o1KKeVdB2595ZM45zSGO",
+            "_id": "857061"
+        }
+    ],
+    "career_predictions": [
+        {
+            "inputs_skills": {
+                "Database Fundamentals": "Intermediate",
+                "Programming Skills": "Excellent",
+                "Computer Architecture": "Beginner"
+            },
+            "predicted_career": "Graphics Designer",
+            "timestamp": "2026-05-27 10:34:49.973365+00:00",
+            "user_email": "sparsh@example.com",
+            "_id": "770236"
+        },
+        {
+            "inputs_skills": {
+                "Database Fundamentals": "Intermediate",
+                "Software Development": "Excellent",
+                "Programming Skills": "Excellent",
+                "AI ML": "Intermediate"
+            },
+            "predicted_career": "Graphics Designer",
+            "timestamp": "2026-05-27 10:39:15.945729+00:00",
+            "user_email": "test@example.com",
+            "_id": "369741"
+        }
+    ]
+}

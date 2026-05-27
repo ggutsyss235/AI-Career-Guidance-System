@@ -101,7 +101,7 @@ const DraggableSection = ({ sectionId, children }) => {
         <div style={{
           position:'absolute', top:5, right:5, zIndex:200,
           background:'rgba(124,107,255,.92)', color:'white',
-          borderRadius:6, padding:'2px 8px', fontSize:10, fontWeight:700,
+          borderRadius:6, padding:'2px 8px', fontSize:10, fontWeight:70,
           display:'flex', alignItems:'center', gap:4,
           boxShadow:'0 2px 10px rgba(0,0,0,.35)',
           pointerEvents:'none', userSelect:'none',
@@ -130,7 +130,7 @@ const Photo = ({src,name,size=100,border='3px solid rgba(255,255,255,.35)',bg='#
   <div style={{width:size,height:size,borderRadius:radius,overflow:'hidden',background:bg,flexShrink:0,border,display:'flex',alignItems:'center',justifyContent:'center'}}>
     {src
       ? <img src={src} alt={name} style={{width:'100%',height:'100%',objectFit:'cover'}}/>
-      : <span style={{color:'#fff',fontSize:size*.34,fontWeight:700}}>{initials(name)}</span>}
+      : <span style={{color:'#fff',fontSize:size*.34,fontWeight:70}}>{initials(name)}</span>}
   </div>
 );
 
@@ -148,34 +148,34 @@ const T_Mariana = ({data, sections}) => {
   const leftSecs  = sections.filter(s => s.enabled && ['skills','education','languages','certifications','hobbies'].includes(s.id));
   const rightSecs = sections.filter(s => s.enabled && ['summary','experience','projects','references'].includes(s.id));
 
-  const LL = ({c}) => <h4 style={{color:'#fff',fontSize:17,fontWeight:700,fontFamily:'Georgia,serif',margin:'18px 0 5px',borderBottom:'1px solid rgba(255,255,255,.2)',paddingBottom:3}}>{c}</h4>;
-  const RL = ({c}) => <h3 style={{fontSize:21,fontWeight:700,fontFamily:'Georgia,serif',color:'#222',borderBottom:'1px solid #ccc',paddingBottom:5,marginTop:20,marginBottom:11}}>{c}</h3>;
+  const LL = ({c}) => <h4 style={{color:'#fff',fontSize:17,fontWeight:70,fontFamily:'Georgia,serif',margin:'18px 0 5px',borderBottom:'1px solid rgba(255,255,255,.2)',paddingBottom:3}}>{c}</h4>;
+  const RL = ({c}) => <h3 style={{fontSize:21,fontWeight:70,fontFamily:'Georgia,serif',color:'#222',borderBottom:'1px solid #ccc',paddingBottom:5,marginTop:20,marginBottom:11}}>{c}</h3>;
 
   const lmap = {
     skills: () => (<div><LL c="Expertise"/>{data.skills.split(',').map((s,i)=><p key={i} style={{color:'rgba(255,255,255,.85)',fontSize:13,margin:'3px 0',display:'flex',alignItems:'center',gap:6}}><span style={{width:5,height:5,borderRadius:'50%',background:'rgba(255,255,255,.55)',flexShrink:0}}/>{s.trim()}</p>)}</div>),
-    education: () => (<div><LL c="Education"/>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{color:'rgba(255,255,255,.45)',fontSize:10.5,margin:'0 0 1px'}}>{data.education[key].passingYear}</p><p style={{color:'#fff',fontWeight:700,fontSize:12,margin:'0 0 1px'}}>{title}</p><p style={{color:'rgba(255,255,255,.7)',fontSize:12,margin:0}}>{data.education[key].school}</p></div>))}</div>),
+    education: () => (<div><LL c="Education"/>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{color:'rgba(255,255,255,.45)',fontSize:10.5,margin:'0 0 1px'}}>{data.education[key].passingYear}</p><p style={{color:'#fff',fontWeight:70,fontSize:12,margin:'0 0 1px'}}>{title}</p><p style={{color:'rgba(255,255,255,.7)',fontSize:12,margin:0}}>{data.education[key].school}</p></div>))}</div>),
     languages: () => data.languages?.length ? (<div><LL c="Language"/>{data.languages.map((l,i)=><p key={i} style={{color:'rgba(255,255,255,.85)',fontSize:13,margin:'3px 0'}}>{l.lang}</p>)}</div>) : null,
     certifications: () => data.certifications?.length ? (<div><LL c="Certifications"/>{data.certifications.map((c,i)=><p key={i} style={{color:'rgba(255,255,255,.85)',fontSize:12,margin:'3px 0'}}>{c.name}</p>)}</div>) : null,
     hobbies: () => data.hobbies ? (<div><LL c="Interests"/><p style={{color:'rgba(255,255,255,.8)',fontSize:13}}>{data.hobbies}</p></div>) : null,
   };
   const rmap = {
     summary: () => data.summary ? <p style={{fontSize:13,lineHeight:1.72,color:'#444',marginBottom:20,borderBottom:'1px solid #eee',paddingBottom:16}}>{data.summary}</p> : null,
-    experience: () => (<div style={{marginBottom:10}}><RL c="Experience"/>{data.experience.map((exp,i)=>(<div key={exp.id} style={{display:'flex',gap:13,marginBottom:17}}><div style={{display:'flex',flexDirection:'column',alignItems:'center',paddingTop:4}}><div style={{width:11,height:11,borderRadius:'50%',border:`2px solid ${N}`,background:'white',flexShrink:0}}/>{i<data.experience.length-1&&<div style={{width:1,flex:1,background:'#ddd',marginTop:4}}/>}</div><div style={{flex:1}}><p style={{fontSize:11,color:'#888',margin:'0 0 1px'}}>{fmtRange(exp)}</p><p style={{fontSize:11.5,color:'#555',margin:'0 0 3px'}}>{exp.company}{data.address?`, ${data.address}`:''}</p><p style={{fontSize:14,fontWeight:700,color:'#222',margin:'0 0 5px'}}>{exp.title}</p><p style={{fontSize:12.5,color:'#444',lineHeight:1.65,textAlign:'justify',margin:0}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div></div>))}</div>),
-    projects: () => data.projects?.length ? (<div style={{marginBottom:10}}><RL c="Projects"/>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:12}}><p style={{fontWeight:700,fontSize:14,margin:'0 0 3px'}}>{p.name}</p>{p.technologies&&<p style={{fontSize:11.5,color:'#888',margin:'0 0 3px',fontStyle:'italic'}}>{p.technologies}</p>}<p style={{fontSize:12.5,color:'#444',lineHeight:1.6}}>{p.description}</p></div>))}</div>) : null,
-    references: () => data.references?.length ? (<div><RL c="Reference"/><div style={{display:'flex',gap:22,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id} style={{flex:1,minWidth:150}}><p style={{fontWeight:700,fontSize:15,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:'0 0 5px'}}>{r.company}{r.title?` / ${r.title}`:''}</p>{r.phone&&<p style={{fontSize:11.5,color:'#555',margin:'0 0 2px'}}>Phone: {r.phone}</p>}{r.email&&<p style={{fontSize:11.5,color:'#555',margin:0}}>Email: {r.email}</p>}</div>))}</div></div>) : null,
+    experience: () => (<div style={{marginBottom:10}}><RL c="Experience"/>{data.experience.map((exp,i)=>(<div key={exp.id} style={{display:'flex',gap:13,marginBottom:17}}><div style={{display:'flex',flexDirection:'column',alignItems:'center',paddingTop:4}}><div style={{width:11,height:11,borderRadius:'50%',border:`2px solid ${N}`,background:'white',flexShrink:0}}/>{i<data.experience.length-1&&<div style={{width:1,flex:1,background:'#ddd',marginTop:4}}/>}</div><div style={{flex:1}}><p style={{fontSize:11,color:'#888',margin:'0 0 1px'}}>{fmtRange(exp)}</p><p style={{fontSize:11.5,color:'#555',margin:'0 0 3px'}}>{exp.company}{data.address?`, ${data.address}`:''}</p><p style={{fontSize:14,fontWeight:70,color:'#222',margin:'0 0 5px'}}>{exp.title}</p><p style={{fontSize:12.5,color:'#444',lineHeight:1.65,textAlign:'justify',margin:0}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div></div>))}</div>),
+    projects: () => data.projects?.length ? (<div style={{marginBottom:10}}><RL c="Projects"/>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:12}}><p style={{fontWeight:70,fontSize:14,margin:'0 0 3px'}}>{p.name}</p>{p.technologies&&<p style={{fontSize:11.5,color:'#888',margin:'0 0 3px',fontStyle:'italic'}}>{p.technologies}</p>}<p style={{fontSize:12.5,color:'#444',lineHeight:1.6}}>{p.description}</p></div>))}</div>) : null,
+    references: () => data.references?.length ? (<div><RL c="Reference"/><div style={{display:'flex',gap:22,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id} style={{flex:1,minWidth:150}}><p style={{fontWeight:70,fontSize:15,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:'0 0 5px'}}>{r.company}{r.title?` / ${r.title}`:''}</p>{r.phone&&<p style={{fontSize:11.5,color:'#555',margin:'0 0 2px'}}>Phone: {r.phone}</p>}{r.email&&<p style={{fontSize:11.5,color:'#555',margin:0}}>Email: {r.email}</p>}</div>))}</div></div>) : null,
   };
   return (
     <div style={{display:'flex',fontFamily:'Arial,sans-serif',minHeight:'297mm',background:'white'}}>
       <div style={{width:'32%',background:N,padding:'28px 19px',color:'white'}}>
         <div style={{display:'flex',justifyContent:'center',marginBottom:15}}><Photo src={data.photo} name={data.name} size={108} bg='#4a6080'/></div>
-        <h4 style={{color:'#fff',fontSize:17,fontWeight:700,fontFamily:'Georgia,serif',margin:'0 0 5px',borderBottom:'1px solid rgba(255,255,255,.2)',paddingBottom:3}}>Contact</h4>
-        {data.phone&&<><p style={{color:'rgba(255,255,255,.5)',fontSize:10.5,margin:'6px 0 1px',fontWeight:700,textTransform:'uppercase',letterSpacing:.5}}>Phone</p><p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:0}}>{data.phone}</p></>}
-        {data.email&&<><p style={{color:'rgba(255,255,255,.5)',fontSize:10.5,margin:'6px 0 1px',fontWeight:700,textTransform:'uppercase',letterSpacing:.5}}>Email</p><p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:0}}>{data.email}</p></>}
-        {data.address&&<><p style={{color:'rgba(255,255,255,.5)',fontSize:10.5,margin:'6px 0 1px',fontWeight:700,textTransform:'uppercase',letterSpacing:.5}}>Address</p><p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:0}}>{data.address}</p></>}
+        <h4 style={{color:'#fff',fontSize:17,fontWeight:70,fontFamily:'Georgia,serif',margin:'0 0 5px',borderBottom:'1px solid rgba(255,255,255,.2)',paddingBottom:3}}>Contact</h4>
+        {data.phone&&<><p style={{color:'rgba(255,255,255,.5)',fontSize:10.5,margin:'6px 0 1px',fontWeight:70,textTransform:'uppercase',letterSpacing:.5}}>Phone</p><p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:0}}>{data.phone}</p></>}
+        {data.email&&<><p style={{color:'rgba(255,255,255,.5)',fontSize:10.5,margin:'6px 0 1px',fontWeight:70,textTransform:'uppercase',letterSpacing:.5}}>Email</p><p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:0}}>{data.email}</p></>}
+        {data.address&&<><p style={{color:'rgba(255,255,255,.5)',fontSize:10.5,margin:'6px 0 1px',fontWeight:70,textTransform:'uppercase',letterSpacing:.5}}>Address</p><p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:0}}>{data.address}</p></>}
         {RS(leftSecs, lmap)}
       </div>
       <div style={{flex:1,padding:'32px 26px'}}>
-        <h1 style={{fontSize:33,fontWeight:700,fontFamily:'Georgia,serif',margin:'0 0 4px',color:'#1a1a1a'}}>{data.name}</h1>
+        <h1 style={{fontSize:33,fontWeight:70,fontFamily:'Georgia,serif',margin:'0 0 4px',color:'#1a1a1a'}}>{data.name}</h1>
         {data.title&&<h2 style={{fontSize:14.5,fontWeight:400,letterSpacing:3,color:'#555',fontFamily:'Georgia,serif',margin:'0 0 17px',textTransform:'uppercase'}}>{data.title}</h2>}
         {RS(rightSecs, rmap)}
       </div>
@@ -186,14 +186,14 @@ const T_Sebastian = ({data, sections}) => {
   const SH = {fontSize:14,fontWeight:800,textTransform:'uppercase',letterSpacing:1.5,color:'#222',borderBottom:'1px solid #ddd',paddingBottom:5,marginBottom:12,marginTop:20};
   const map = {
     summary: () => (<section><h4 style={SH}>About Me</h4><p style={{fontSize:13,lineHeight:1.75,color:'#333',margin:0}}>{data.summary}</p></section>),
-    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:13,borderBottom:'1px solid #f0f0f0',paddingBottom:13}}><p style={{fontSize:12,color:'#888',margin:'0 0 1px'}}>{data.education[key].school} | {data.education[key].passingYear}</p><p style={{fontSize:14,fontWeight:700,color:'#222',margin:'0 0 4px'}}>{title}</p></div>))}</section>),
-    experience: () => (<section><h4 style={SH}>Work Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13,borderBottom:'1px solid #f0f0f0',paddingBottom:13}}><p style={{fontSize:12,color:'#888',margin:'0 0 1px'}}>{exp.company} | {fmtRange(exp)}</p><p style={{fontSize:14,fontWeight:700,color:'#222',margin:'0 0 4px'}}>{exp.title}</p><p style={{fontSize:13,color:'#555',lineHeight:1.65,margin:0}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
+    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:13,borderBottom:'1px solid #f0f0f0',paddingBottom:13}}><p style={{fontSize:12,color:'#888',margin:'0 0 1px'}}>{data.education[key].school} | {data.education[key].passingYear}</p><p style={{fontSize:14,fontWeight:70,color:'#222',margin:'0 0 4px'}}>{title}</p></div>))}</section>),
+    experience: () => (<section><h4 style={SH}>Work Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13,borderBottom:'1px solid #f0f0f0',paddingBottom:13}}><p style={{fontSize:12,color:'#888',margin:'0 0 1px'}}>{exp.company} | {fmtRange(exp)}</p><p style={{fontSize:14,fontWeight:70,color:'#222',margin:'0 0 4px'}}>{exp.title}</p><p style={{fontSize:13,color:'#555',lineHeight:1.65,margin:0}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
     skills: () => (<section><h4 style={SH}>Skills</h4><div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'2px 16px'}}>{data.skills.split(',').map((s,i)=><p key={i} style={{fontSize:12.5,color:'#333',margin:'2px 0',display:'flex',alignItems:'center',gap:5}}><span style={{fontSize:7}}>•</span>{s.trim()}</p>)}</div></section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:11}}><p style={{fontSize:14,fontWeight:700,color:'#222',margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:13,color:'#555'}}>{p.description}</p></div>))}</section>) : null,
-    certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=>(<div key={c.id} style={{marginBottom:8}}><p style={{fontWeight:700,fontSize:13,margin:'0 0 1px'}}>{c.name}</p><p style={{fontSize:12,color:'#888',margin:0}}>{c.issuer} {c.year&&`· ${c.year}`}</p></div>))}</section>) : null,
+    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:11}}><p style={{fontSize:14,fontWeight:70,color:'#222',margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:13,color:'#555'}}>{p.description}</p></div>))}</section>) : null,
+    certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=>(<div key={c.id} style={{marginBottom:8}}><p style={{fontWeight:70,fontSize:13,margin:'0 0 1px'}}>{c.name}</p><p style={{fontSize:12,color:'#888',margin:0}}>{c.issuer} {c.year&&`· ${c.year}`}</p></div>))}</section>) : null,
     languages: () => data.languages?.length ? (<section><h4 style={SH}>Languages</h4><p style={{fontSize:13,color:'#333'}}>{data.languages.map(l=>`${l.lang} (${l.level})`).join(' · ')}</p></section>) : null,
     hobbies: () => data.hobbies ? (<section><h4 style={SH}>Interests</h4><p style={{fontSize:13,color:'#333'}}>{data.hobbies}</p></section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4><div style={{display:'flex',gap:22,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id}><p style={{fontWeight:700,fontSize:14,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12.5,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4><div style={{display:'flex',gap:22,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id}><p style={{fontWeight:70,fontSize:14,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12.5,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
   };
   return (
     <div style={{fontFamily:'"Helvetica Neue",Arial,sans-serif',color:'#111',background:'white',minHeight:'297mm'}}>
@@ -217,8 +217,8 @@ const T_TechPro = ({data, sections}) => {
   const D='#1a2332', C='#4fc3d0';
   const leftSecs  = sections.filter(s=>s.enabled&&['skills','languages','hobbies','certifications'].includes(s.id));
   const rightSecs = sections.filter(s=>s.enabled&&['summary','experience','education','projects','references'].includes(s.id));
-  const LL=({c})=><h5 style={{color:'#fff',fontSize:12.5,fontWeight:700,textTransform:'uppercase',letterSpacing:1.8,margin:'18px 0 9px',paddingBottom:3,borderBottom:'1px solid rgba(255,255,255,.18)'}}>{c}</h5>;
-  const RL=({c})=><h4 style={{fontSize:15.5,fontWeight:700,textTransform:'uppercase',letterSpacing:1.8,color:'#111',borderBottom:'2px solid #eee',paddingBottom:5,margin:'20px 0 13px'}}>{c}</h4>;
+  const LL=({c})=><h5 style={{color:'#fff',fontSize:32.5,fontWeight:70,textTransform:'uppercase',letterSpacing:1.8,margin:'18px 0 9px',paddingBottom:3,borderBottom:'1px solid rgba(255,255,255,.18)'}}>{c}</h5>;
+  const RL=({c})=><h4 style={{fontSize:45.5,fontWeight:70,textTransform:'uppercase',letterSpacing:1.8,color:'#111',borderBottom:'2px solid #eee',paddingBottom:5,margin:'20px 0 13px'}}>{c}</h4>;
   const lmap={
     skills: () => (<div><LL c="Skills"/>{data.skills.split(',').map((s,i)=><p key={i} style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:'4px 0',display:'flex',alignItems:'center',gap:7}}><span style={{width:8,height:8,borderRadius:'50%',border:'1.5px solid rgba(255,255,255,.45)',flexShrink:0}}/>{s.trim()}</p>)}</div>),
     languages: () => data.languages?.length ? (<div><LL c="Languages"/>{data.languages.map((l,i)=><p key={i} style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:'4px 0',display:'flex',justifyContent:'space-between'}}><span style={{display:'flex',alignItems:'center',gap:7}}><span style={{width:8,height:8,borderRadius:'50%',border:'1.5px solid rgba(255,255,255,.45)',flexShrink:0}}/>{l.lang}</span><strong style={{color:C}}>{l.level}</strong></p>)}</div>) : null,
@@ -227,17 +227,17 @@ const T_TechPro = ({data, sections}) => {
   };
   const rmap={
     summary: () => (<section style={{marginBottom:15}}><RL c="Profile"/><p style={{fontSize:13,lineHeight:1.75,color:'#444',textAlign:'justify',margin:0}}>{data.summary}</p></section>),
-    experience: () => (<section style={{marginBottom:15}}><RL c="Work Experience"/>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:15}}><p style={{fontWeight:700,fontSize:14,margin:'0 0 2px'}}>{exp.title}</p><p style={{fontSize:12.5,color:'#666',margin:'0 0 5px'}}>{exp.company} — {fmtRange(exp)}</p><ul style={{margin:0,paddingLeft:19}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:12.5,color:'#333',marginBottom:3,lineHeight:1.6}}>{d.trim()}</li>)}</ul></div>))}</section>),
-    education: () => (<section style={{marginBottom:15}}><RL c="Education"/>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:13}}><p style={{fontWeight:700,fontSize:14,margin:'0 0 2px'}}>{title}</p><p style={{fontSize:12,color:'#777',margin:'0 0 1px'}}>{data.education[key].passingYear}</p><p style={{fontSize:12.5,fontStyle:'italic',color:'#555',margin:0}}>{data.education[key].school}</p></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><RL c="Projects"/>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:11}}><p style={{fontWeight:700,fontSize:14,margin:'0 0 2px'}}>{p.name}</p>{p.technologies&&<p style={{fontSize:12,color:'#888',margin:'0 0 3px'}}>{p.technologies}</p>}<p style={{fontSize:12.5,color:'#444',lineHeight:1.6}}>{p.description}</p></div>))}</section>) : null,
-    references: () => data.references?.length ? (<section><RL c="References"/><div style={{display:'flex',gap:18,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id}><p style={{fontWeight:700,fontSize:14,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
+    experience: () => (<section style={{marginBottom:15}}><RL c="Work Experience"/>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:15}}><p style={{fontWeight:70,fontSize:14,margin:'0 0 2px'}}>{exp.title}</p><p style={{fontSize:12.5,color:'#666',margin:'0 0 5px'}}>{exp.company} — {fmtRange(exp)}</p><ul style={{margin:0,paddingLeft:19}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:12.5,color:'#333',marginBottom:3,lineHeight:1.6}}>{d.trim()}</li>)}</ul></div>))}</section>),
+    education: () => (<section style={{marginBottom:15}}><RL c="Education"/>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:13}}><p style={{fontWeight:70,fontSize:14,margin:'0 0 2px'}}>{title}</p><p style={{fontSize:12,color:'#777',margin:'0 0 1px'}}>{data.education[key].passingYear}</p><p style={{fontSize:12.5,fontStyle:'italic',color:'#555',margin:0}}>{data.education[key].school}</p></div>))}</section>),
+    projects: () => data.projects?.length ? (<section><RL c="Projects"/>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:11}}><p style={{fontWeight:70,fontSize:14,margin:'0 0 2px'}}>{p.name}</p>{p.technologies&&<p style={{fontSize:12,color:'#888',margin:'0 0 3px'}}>{p.technologies}</p>}<p style={{fontSize:12.5,color:'#444',lineHeight:1.6}}>{p.description}</p></div>))}</section>) : null,
+    references: () => data.references?.length ? (<section><RL c="References"/><div style={{display:'flex',gap:18,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id}><p style={{fontWeight:70,fontSize:14,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
   };
   return (
     <div style={{display:'flex',fontFamily:'Arial,sans-serif',minHeight:'297mm',background:'white'}}>
       <div style={{width:'33%',background:D,padding:'26px 17px',color:'white'}}>
         <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginBottom:18}}>
-          <Photo src={data.photo} name={data.name} size={115} bg='#2d4060'/>
-          <h2 style={{color:'white',fontSize:21,fontWeight:700,margin:'13px 0 3px',textAlign:'center'}}>{data.name}</h2>
+          <Photo src={data.photo} name={data.name} size={11.5} bg='#2d4060'/>
+          <h2 style={{color:'white',fontSize:21,fontWeight:70,margin:'13px 0 3px',textAlign:'center'}}>{data.name}</h2>
           {data.title&&<p style={{color:C,fontSize:12.5,textAlign:'center',margin:0}}>{data.title}</p>}
         </div>
         <LL c="Contact"/>
@@ -246,7 +246,7 @@ const T_TechPro = ({data, sections}) => {
         {data.address&&<p style={{color:'rgba(255,255,255,.85)',fontSize:12.5,margin:'4px 0'}}>📍 {data.address}</p>}
         {RS(leftSecs, lmap)}
       </div>
-      <div style={{flex:1,padding:'26px 22px'}}>{RS(rightSecs, rmap)}</div>
+      <div style={{flex:1,padding:'46px 22px'}}>{RS(rightSecs, rmap)}</div>
     </div>
   );
 };
@@ -254,19 +254,19 @@ const T_TechPro = ({data, sections}) => {
 
 const T_Joshua = ({data, sections}) => {
   const Y='#f5a623';
-  const IB=({e})=><div style={{width:42,height:42,borderRadius:'50%',background:Y,display:'flex',alignItems:'center',justifyContent:'center',fontSize:19,flexShrink:0}}>{e}</div>;
-  const GC=({title,emoji,content})=>(<div style={{flex:'1 1 45%',padding:'14px',background:'white',borderRadius:6,boxShadow:'0 1px 4px rgba(0,0,0,.06)'}}><div style={{display:'flex',alignItems:'center',gap:11,marginBottom:11}}><IB e={emoji}/><h4 style={{fontSize:15.5,fontWeight:700,color:'#222',margin:0,lineHeight:1.3}}>{title}</h4></div>{content}</div>);
+  const IB=({e})=><div style={{width:42,height:82,borderRadius:'50%',background:Y,display:'flex',alignItems:'center',justifyContent:'center',fontSize:19,flexShrink:0}}>{e}</div>;
+  const GC=({title,emoji,content})=>(<div style={{flex:'1 1 45%',padding:'14px',background:'white',borderRadius:6,boxShadow:'0 1px 4px rgba(0,0,0,.06)'}}><div style={{display:'flex',alignItems:'center',gap:11,marginBottom:11}}><IB e={emoji}/><h4 style={{fontSize:15.5,fontWeight:70,color:'#222',margin:0,lineHeight:1.3}}>{title}</h4></div>{content}</div>);
   return (
     <div style={{fontFamily:'Arial,sans-serif',background:'#f4f4f4',minHeight:'297mm'}}>
       <div style={{background:'white',position:'relative',padding:'26px 30px 0',overflow:'hidden',borderRadius:'0 0 20px 20px'}}>
         <div style={{position:'absolute',right:28,top:-38,width:250,height:250,borderRadius:'50%',background:Y,zIndex:0}}/>
         <div style={{position:'relative',zIndex:1,display:'flex',alignItems:'flex-start',gap:22,paddingBottom:22}}>
           <div style={{flex:1}}>
-            <h1 style={{fontSize:34,fontWeight:700,color:'#222',lineHeight:1.12,margin:'0 0 10px'}}>{data.name}</h1>
+            <h1 style={{fontSize:34,fontWeight:70,color:'#222',lineHeight:1.12,margin:'0 0 10px'}}>{data.name}</h1>
             <div style={{display:'inline-block',background:Y,padding:'3px 13px',borderRadius:2,marginBottom:11}}>
-              <p style={{fontSize:11,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'#333',margin:0}}>{data.title||'Professional'}</p>
+              <p style={{fontSize:11,fontWeight:70,letterSpacing:2,textTransform:'uppercase',color:'#333',margin:0}}>{data.title||'Professional'}</p>
             </div>
-            {data.summary&&<p style={{fontSize:12.5,color:'#666',lineHeight:1.6,marginTop:9,maxWidth:280}}>{data.summary.substring(0,160)}{data.summary.length>160?'...':''}</p>}
+            {data.summary&&<p style={{fontSize:22.5,color:'#666',lineHeight:1.6,marginTop:9,maxWidth:280}}>{data.summary.substring(0,160)}{data.summary.length>160?'...':''}</p>}
           </div>
           <div style={{position:'relative',zIndex:2,marginRight:14,marginTop:8}}><Photo src={data.photo} name={data.name} size={130} bg='#ccc' border='none' radius='50%'/></div>
         </div>
@@ -287,21 +287,21 @@ const T_Joshua = ({data, sections}) => {
 };
 
 const T_Kai = ({data, sections}) => {
-  const SH={fontSize:13,fontWeight:700,textTransform:'uppercase',letterSpacing:1.5,color:'#111',borderBottom:'2px solid #111',paddingBottom:5,marginBottom:9,marginTop:17};
+  const SH={fontSize:13,fontWeight:70,textTransform:'uppercase',letterSpacing:1.5,color:'#111',borderBottom:'2px solid #111',paddingBottom:5,marginBottom:9,marginTop:17};
   const leftSecs  = sections.filter(s=>s.enabled&&['summary','experience','projects'].includes(s.id));
   const rightSecs = sections.filter(s=>s.enabled&&['education','skills','hobbies','languages','certifications','references'].includes(s.id));
   const lmap={
     summary: () => (<section><h4 style={SH}>Profile</h4><p style={{fontSize:12.5,lineHeight:1.7,color:'#333'}}>{data.summary}</p></section>),
     experience: () => (<section><h4 style={SH}>Work Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13}}><p style={{fontSize:12,color:'#888',margin:'0 0 1px',textTransform:'uppercase',letterSpacing:.5}}>{exp.company}, {exp.title}</p><p style={{fontSize:11.5,color:'#999',margin:'0 0 4px'}}>{fmtRange(exp)}</p><p style={{fontSize:12.5,color:'#333',lineHeight:1.65}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:700,fontSize:13,margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:12.5,color:'#444'}}>{p.description}</p></div>))}</section>) : null,
+    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:70,fontSize:13,margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:12.5,color:'#444'}}>{p.description}</p></div>))}</section>) : null,
   };
   const rmap={
-    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:11}}><p style={{fontSize:11,color:'#888',textTransform:'uppercase',letterSpacing:.5,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontSize:11,color:'#888',margin:'0 0 1px'}}>{data.education[key].passingYear}</p><p style={{fontWeight:700,fontSize:13,margin:0}}>{title}</p></div>))}</section>),
+    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:11}}><p style={{fontSize:11,color:'#888',textTransform:'uppercase',letterSpacing:.5,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontSize:11,color:'#888',margin:'0 0 1px'}}>{data.education[key].passingYear}</p><p style={{fontWeight:70,fontSize:13,margin:0}}>{title}</p></div>))}</section>),
     skills: () => (<section><h4 style={SH}>Skills</h4>{data.skills.split(',').map((s,i)=><p key={i} style={{fontSize:12.5,color:'#333',margin:'3px 0'}}>{s.trim()}</p>)}</section>),
     hobbies: () => data.hobbies ? (<section><h4 style={SH}>Hobbies</h4>{data.hobbies.split(',').map((h,i)=><p key={i} style={{fontSize:12.5,color:'#333',margin:'3px 0'}}>{h.trim()}</p>)}</section>) : null,
     languages: () => data.languages?.length ? (<section><h4 style={SH}>Languages</h4>{data.languages.map(l=><p key={l.id||l.lang} style={{fontSize:12.5,color:'#333',margin:'3px 0'}}>{l.lang} — {l.level}</p>)}</section>) : null,
     certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=><p key={c.id} style={{fontSize:12.5,color:'#333',margin:'3px 0'}}>{c.name}</p>)}</section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4>{data.references.map(r=><div key={r.id} style={{marginBottom:7}}><p style={{fontWeight:700,fontSize:13,margin:0}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>)}</section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4>{data.references.map(r=><div key={r.id} style={{marginBottom:7}}><p style={{fontWeight:70,fontSize:13,margin:0}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>)}</section>) : null,
   };
   const XP=()=>(<div style={{position:'absolute',right:0,top:0,width:155,height:88,overflow:'hidden',opacity:.65}}>{[[-20,0],[30,0],[80,0],[130,0],[-20,28],[30,28],[80,28],[130,28]].map(([x,y],i)=>(<div key={i} style={{position:'absolute',left:x,top:y,width:38,height:38,transform:'rotate(45deg)',border:'4px solid rgba(255,255,255,.32)'}}/>))}</div>);
   return (
@@ -317,7 +317,7 @@ const T_Kai = ({data, sections}) => {
         </div>
       </div>
       <div style={{display:'flex'}}>
-        <div style={{flex:1,padding:'7px 19px',borderRight:'1px solid #e8e8e8'}}>{RS(leftSecs,lmap)}</div>
+        <div style={{flex:1,padding:'7px 29px',borderRight:'1px solid #e8e8e8'}}>{RS(leftSecs,lmap)}</div>
         <div style={{width:'38%',padding:'7px 19px'}}>{RS(rightSecs,rmap)}</div>
       </div>
     </div>
@@ -326,26 +326,26 @@ const T_Kai = ({data, sections}) => {
 
 const T_Isabelle = ({data, sections}) => {
   const T='#2e6b7d';
-  const SH={fontSize:10.5,fontWeight:700,textTransform:'uppercase',letterSpacing:1.5,color:T,margin:'13px 0 5px',paddingBottom:3,borderBottom:`1px solid ${T}`};
+  const SH={fontSize:10.5,fontWeight:70,textTransform:'uppercase',letterSpacing:1.5,color:T,margin:'13px 0 5px',paddingBottom:3,borderBottom:`1px solid ${T}`};
   const leftSecs  = sections.filter(s=>s.enabled&&['summary','experience','projects'].includes(s.id));
   const rightSecs = sections.filter(s=>s.enabled&&['education','certifications','skills','languages','hobbies','references'].includes(s.id));
   const lmap={
     summary: () => (<section><h4 style={SH}>Profile</h4><p style={{fontSize:12,lineHeight:1.65,color:'#444',margin:0}}>{data.summary}</p></section>),
-    experience: () => (<section><h4 style={SH}>Professional Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:11}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><p style={{fontWeight:700,fontSize:12.5,margin:0,color:'#222'}}>{exp.title}</p><span style={{fontSize:10.5,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:11.5,color:'#666',margin:'1px 0 4px',fontStyle:'italic'}}>{exp.company}</p><ul style={{margin:0,paddingLeft:15}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:11.5,color:'#444',marginBottom:2,lineHeight:1.55}}>{d.trim()}</li>)}</ul></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:700,fontSize:12.5,margin:0}}>{p.name}</p><p style={{fontSize:11.5,color:'#555',marginTop:3}}>{p.description}</p></div>))}</section>) : null,
+    experience: () => (<section><h4 style={SH}>Professional Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:11}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><p style={{fontWeight:70,fontSize:12.5,margin:0,color:'#222'}}>{exp.title}</p><span style={{fontSize:10.5,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:11.5,color:'#666',margin:'1px 0 4px',fontStyle:'italic'}}>{exp.company}</p><ul style={{margin:0,paddingLeft:15}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:11.5,color:'#444',marginBottom:2,lineHeight:1.55}}>{d.trim()}</li>)}</ul></div>))}</section>),
+    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:70,fontSize:12.5,margin:0}}>{p.name}</p><p style={{fontSize:11.5,color:'#555',marginTop:3}}>{p.description}</p></div>))}</section>) : null,
   };
   const rmap={
-    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:7}}><p style={{fontWeight:700,fontSize:12,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontSize:11,color:'#666',margin:0}}>{title} · {data.education[key].passingYear}</p></div>))}</section>),
+    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:7}}><p style={{fontWeight:70,fontSize:12,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontSize:11,color:'#666',margin:0}}>{title} · {data.education[key].passingYear}</p></div>))}</section>),
     certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=>(<p key={c.id} style={{fontSize:12,color:'#333',margin:'0 0 4px'}}><strong>{c.name}</strong><br/><span style={{fontSize:11,color:'#888'}}>{c.issuer} {c.year&&`· ${c.year}`}</span></p>))}</section>) : null,
     skills: () => (<section><h4 style={SH}>Technical Skills</h4><div style={{display:'flex',flexWrap:'wrap',gap:4}}>{data.skills.split(',').map((s,i)=><span key={i} style={{fontSize:10.5,padding:'3px 8px',border:`1px solid ${T}`,borderRadius:3,color:T,background:`${T}11`}}>{s.trim()}</span>)}</div></section>),
     languages: () => data.languages?.length ? (<section><h4 style={SH}>Languages</h4>{data.languages.map(l=><p key={l.id||l.lang} style={{fontSize:12,color:'#333',margin:'2px 0'}}>{l.lang} — {l.level}</p>)}</section>) : null,
     hobbies: () => data.hobbies ? (<section><h4 style={SH}>Interests</h4><p style={{fontSize:12,color:'#555'}}>{data.hobbies}</p></section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4>{data.references.map(r=><div key={r.id} style={{marginBottom:5}}><p style={{fontWeight:700,fontSize:12,margin:0}}>{r.name}</p><p style={{fontSize:11,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>)}</section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4>{data.references.map(r=><div key={r.id} style={{marginBottom:5}}><p style={{fontWeight:70,fontSize:12,margin:0}}>{r.name}</p><p style={{fontSize:11,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>)}</section>) : null,
   };
   return (
     <div style={{fontFamily:'Arial,sans-serif',background:'white',minHeight:'297mm'}}>
       <div style={{background:T,padding:'17px 21px'}}>
-        <h1 style={{color:'white',fontSize:21,fontWeight:700,margin:'0 0 2px',textTransform:'uppercase',letterSpacing:2}}>{data.name}</h1>
+        <h1 style={{color:'white',fontSize:31,fontWeight:70,margin:'0 0 2px',textTransform:'uppercase',letterSpacing:2}}>{data.name}</h1>
         {data.title&&<p style={{color:'rgba(255,255,255,.8)',fontSize:12,margin:'0 0 7px',textTransform:'uppercase',letterSpacing:1.5}}>{data.title}</p>}
         <div style={{display:'flex',gap:15,flexWrap:'wrap'}}>
           {data.email&&<span style={{fontSize:11,color:'rgba(255,255,255,.8)'}}>✉ {data.email}</span>}
@@ -365,11 +365,11 @@ const T_Lauren = ({data, sections}) => {
   const T='#1e4e5f', G='#c9a84c';
   const leftSecs  = sections.filter(s=>s.enabled&&['education','skills','languages','hobbies','certifications'].includes(s.id));
   const rightSecs = sections.filter(s=>s.enabled&&['summary','experience','projects','references'].includes(s.id));
-  const SL={color:'rgba(255,255,255,.55)',fontSize:10,textTransform:'uppercase',letterSpacing:2,fontWeight:700,margin:'15px 0 7px',borderBottom:'1px solid rgba(255,255,255,.18)',paddingBottom:3};
-  const SR={fontSize:12,fontWeight:700,textTransform:'uppercase',letterSpacing:1.5,color:T,borderBottom:`1px solid ${T}`,paddingBottom:3,margin:'17px 0 9px'};
+  const SL={color:'rgba(255,255,255,.55)',fontSize:10,textTransform:'uppercase',letterSpacing:2,fontWeight:70,margin:'15px 0 7px',borderBottom:'1px solid rgba(255,255,255,.18)',paddingBottom:3};
+  const SR={fontSize:12,fontWeight:70,textTransform:'uppercase',letterSpacing:1.5,color:T,borderBottom:`1px solid ${T}`,paddingBottom:3,margin:'17px 0 9px'};
   const SBar=({name,pct=75})=>(<div style={{marginBottom:6}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:2}}><p style={{color:'rgba(255,255,255,.85)',fontSize:11.5,margin:0}}>{name}</p><p style={{color:G,fontSize:11,margin:0}}>{pct}%</p></div><div style={{height:4,background:'rgba(255,255,255,.15)',borderRadius:2}}><div style={{width:`${pct}%`,height:'100%',background:G,borderRadius:2}}/></div></div>);
   const lmap={
-    education: () => (<div><p style={SL}>Education</p>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{color:'rgba(255,255,255,.85)',fontSize:12,fontWeight:700,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{color:'rgba(255,255,255,.6)',fontSize:11,margin:'0 0 1px'}}>{title}</p><p style={{color:'rgba(255,255,255,.45)',fontSize:10.5,margin:0}}>{data.education[key].passingYear}</p></div>))}</div>),
+    education: () => (<div><p style={SL}>Education</p>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{color:'rgba(255,255,255,.85)',fontSize:12,fontWeight:70,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{color:'rgba(255,255,255,.6)',fontSize:11,margin:'0 0 1px'}}>{title}</p><p style={{color:'rgba(255,255,255,.45)',fontSize:10.5,margin:0}}>{data.education[key].passingYear}</p></div>))}</div>),
     skills: () => (<div><p style={SL}>Relevant Skills</p>{data.skills.split(',').map((s,i)=><SBar key={i} name={s.trim()} pct={60+((i*17)%35)}/>)}</div>),
     languages: () => data.languages?.length ? (<div><p style={SL}>Languages</p>{data.languages.map(l=>(<div key={l.id||l.lang} style={{marginBottom:3}}><p style={{color:'rgba(255,255,255,.85)',fontSize:12,margin:0}}>{l.lang}</p></div>))}</div>) : null,
     hobbies: () => data.hobbies ? (<div><p style={SL}>Interests</p><p style={{color:'rgba(255,255,255,.7)',fontSize:12}}>{data.hobbies}</p></div>) : null,
@@ -377,16 +377,16 @@ const T_Lauren = ({data, sections}) => {
   };
   const rmap={
     summary: () => (<section><h4 style={SR}>Summary</h4><p style={{fontSize:12.5,lineHeight:1.7,color:'#444'}}>{data.summary}</p></section>),
-    experience: () => (<section><h4 style={SR}>Professional Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><p style={{fontWeight:700,fontSize:13,color:'#222',margin:0}}>{exp.title}</p><span style={{fontSize:11,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:12,color:T,margin:'2px 0 5px'}}>{exp.company}</p><ul style={{margin:0,paddingLeft:15}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:12,color:'#444',marginBottom:3,lineHeight:1.6}}>{d.trim()}</li>)}</ul></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SR}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:700,fontSize:13,margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:12,color:'#555'}}>{p.description}</p></div>))}</section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SR}>References</h4><div style={{display:'flex',gap:15,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id}><p style={{fontWeight:700,fontSize:13,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:11.5,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
+    experience: () => (<section><h4 style={SR}>Professional Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><p style={{fontWeight:70,fontSize:13,color:'#222',margin:0}}>{exp.title}</p><span style={{fontSize:11,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:12,color:T,margin:'2px 0 5px'}}>{exp.company}</p><ul style={{margin:0,paddingLeft:15}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:12,color:'#444',marginBottom:3,lineHeight:1.6}}>{d.trim()}</li>)}</ul></div>))}</section>),
+    projects: () => data.projects?.length ? (<section><h4 style={SR}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:70,fontSize:13,margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:12,color:'#555'}}>{p.description}</p></div>))}</section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SR}>References</h4><div style={{display:'flex',gap:15,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id}><p style={{fontWeight:70,fontSize:13,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:11.5,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
   };
   return (
     <div style={{fontFamily:'Arial,sans-serif',background:'white',minHeight:'297mm'}}>
       <div style={{background:T,padding:'19px 22px',display:'flex',alignItems:'center',gap:17}}>
         <Photo src={data.photo} name={data.name} size={78} bg='#3a7080' border='3px solid rgba(255,255,255,.38)'/>
         <div>
-          <h1 style={{color:'white',fontSize:23,fontWeight:700,textTransform:'uppercase',letterSpacing:2,margin:'0 0 3px'}}>{data.name}</h1>
+          <h1 style={{color:'white',fontSize:23,fontWeight:70,textTransform:'uppercase',letterSpacing:2,margin:'0 0 3px'}}>{data.name}</h1>
           {data.title&&<p style={{color:G,fontSize:12,textTransform:'uppercase',letterSpacing:2,margin:'0 0 7px'}}>{data.title}</p>}
           <div style={{display:'flex',gap:13,flexWrap:'wrap'}}>
             {data.email&&<span style={{color:'rgba(255,255,255,.75)',fontSize:11}}>✉ {data.email}</span>}
@@ -406,20 +406,20 @@ const T_John = ({data, sections}) => {
   const B='#1565c0', LB='#1e88e5';
   const leftSecs  = sections.filter(s=>s.enabled&&['skills','languages','certifications','hobbies'].includes(s.id));
   const rightSecs = sections.filter(s=>s.enabled&&['summary','experience','education','projects','references'].includes(s.id));
-  const SL={color:'white',fontSize:11,fontWeight:700,textTransform:'uppercase',letterSpacing:1.5,margin:'15px 0 7px',paddingBottom:3,borderBottom:'1px solid rgba(255,255,255,.28)'};
-  const SR={fontSize:13,fontWeight:700,textTransform:'uppercase',letterSpacing:1,color:B,margin:'15px 0 9px',paddingBottom:3,borderBottom:`2px solid ${B}`};
+  const SL={color:'white',fontSize:11,fontWeight:70,textTransform:'uppercase',letterSpacing:1.5,margin:'15px 0 7px',paddingBottom:3,borderBottom:'1px solid rgba(255,255,255,.28)'};
+  const SR={fontSize:13,fontWeight:70,textTransform:'uppercase',letterSpacing:1,color:B,margin:'15px 0 9px',paddingBottom:3,borderBottom:`2px solid ${B}`};
   const lmap={
     skills: () => (<div><p style={SL}>Skills</p>{data.skills.split(',').map((s,i)=><p key={i} style={{color:'rgba(255,255,255,.85)',fontSize:12,margin:'3px 0',display:'flex',alignItems:'center',gap:6}}><span style={{width:5,height:5,borderRadius:'50%',background:'rgba(255,255,255,.45)',flexShrink:0}}/>{s.trim()}</p>)}</div>),
-    languages: () => data.languages?.length ? (<div><p style={SL}>Language</p>{data.languages.map(l=>(<div key={l.id||l.lang} style={{marginBottom:7}}><p style={{color:'rgba(255,255,255,.85)',fontSize:12,margin:'0 0 2px',fontWeight:700}}>{l.lang}</p><p style={{color:'rgba(255,255,255,.55)',fontSize:11,margin:0}}>{l.level}</p></div>))}</div>) : null,
+    languages: () => data.languages?.length ? (<div><p style={SL}>Language</p>{data.languages.map(l=>(<div key={l.id||l.lang} style={{marginBottom:7}}><p style={{color:'rgba(255,255,255,.85)',fontSize:12,margin:'0 0 2px',fontWeight:70}}>{l.lang}</p><p style={{color:'rgba(255,255,255,.55)',fontSize:11,margin:0}}>{l.level}</p></div>))}</div>) : null,
     certifications: () => data.certifications?.length ? (<div><p style={SL}>Certifications</p>{data.certifications.map(c=><p key={c.id} style={{color:'rgba(255,255,255,.85)',fontSize:11.5,margin:'3px 0'}}>{c.name}</p>)}</div>) : null,
     hobbies: () => data.hobbies ? (<div><p style={SL}>Hobbies</p><p style={{color:'rgba(255,255,255,.8)',fontSize:12}}>{data.hobbies}</p></div>) : null,
   };
   const rmap={
     summary: () => (<section><h4 style={SR}>About Me</h4><p style={{fontSize:12.5,lineHeight:1.7,color:'#444'}}>{data.summary}</p></section>),
-    experience: () => (<section><h4 style={SR}>Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13,background:'#f8f8f8',borderRadius:6,padding:'9px 11px',borderLeft:`3px solid ${B}`}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><p style={{fontWeight:700,fontSize:13,color:'#222',margin:'0 0 1px'}}>{exp.company}</p><span style={{fontSize:11,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:12,color:LB,margin:'0 0 4px'}}>{exp.title}</p><p style={{fontSize:12,color:'#444',lineHeight:1.6}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
-    education: () => (<section><h4 style={SR}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9,background:'#f8f8f8',borderRadius:6,padding:'7px 11px'}}><div style={{display:'flex',justifyContent:'space-between'}}><p style={{fontWeight:700,fontSize:13,color:'#222',margin:0}}>{title}</p><span style={{fontSize:11,color:'#888'}}>{data.education[key].passingYear}</span></div><p style={{fontSize:12,color:'#888',margin:'2px 0 0',fontStyle:'italic'}}>{data.education[key].school}</p></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SR}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9,background:'#f8f8f8',borderRadius:6,padding:'7px 11px'}}><p style={{fontWeight:700,fontSize:13,color:'#222',margin:'0 0 2px'}}>{p.name}</p>{p.technologies&&<p style={{fontSize:11.5,color:LB,margin:'0 0 3px'}}>{p.technologies}</p>}<p style={{fontSize:12,color:'#555'}}>{p.description}</p></div>))}</section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SR}>References</h4><div style={{display:'flex',gap:13,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id} style={{background:'#f8f8f8',padding:'7px 11px',borderRadius:6}}><p style={{fontWeight:700,fontSize:13,margin:0}}>{r.name}</p><p style={{fontSize:11.5,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
+    experience: () => (<section><h4 style={SR}>Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13,background:'#f8f8f8',borderRadius:6,padding:'9px 11px',borderLeft:`3px solid ${B}`}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}><p style={{fontWeight:70,fontSize:13,color:'#222',margin:'0 0 1px'}}>{exp.company}</p><span style={{fontSize:11,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:12,color:LB,margin:'0 0 4px'}}>{exp.title}</p><p style={{fontSize:12,color:'#444',lineHeight:1.6}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
+    education: () => (<section><h4 style={SR}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9,background:'#f8f8f8',borderRadius:6,padding:'7px 11px'}}><div style={{display:'flex',justifyContent:'space-between'}}><p style={{fontWeight:70,fontSize:13,color:'#222',margin:0}}>{title}</p><span style={{fontSize:11,color:'#888'}}>{data.education[key].passingYear}</span></div><p style={{fontSize:12,color:'#888',margin:'2px 0 0',fontStyle:'italic'}}>{data.education[key].school}</p></div>))}</section>),
+    projects: () => data.projects?.length ? (<section><h4 style={SR}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9,background:'#f8f8f8',borderRadius:6,padding:'7px 11px'}}><p style={{fontWeight:70,fontSize:13,color:'#222',margin:'0 0 2px'}}>{p.name}</p>{p.technologies&&<p style={{fontSize:11.5,color:LB,margin:'0 0 3px'}}>{p.technologies}</p>}<p style={{fontSize:12,color:'#555'}}>{p.description}</p></div>))}</section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SR}>References</h4><div style={{display:'flex',gap:13,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id} style={{background:'#f8f8f8',padding:'7px 11px',borderRadius:6}}><p style={{fontWeight:70,fontSize:13,margin:0}}>{r.name}</p><p style={{fontSize:11.5,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p></div>))}</div></section>) : null,
   };
   return (
     <div style={{fontFamily:'Arial,sans-serif',background:'white',minHeight:'297mm'}}>
@@ -428,7 +428,7 @@ const T_John = ({data, sections}) => {
         <div style={{display:'flex',alignItems:'center',gap:19,padding:'19px 22px',position:'relative',zIndex:1}}>
           <Photo src={data.photo} name={data.name} size={87} bg='rgba(255,255,255,.28)' border='3px solid rgba(255,255,255,.48)'/>
           <div>
-            <h1 style={{color:'white',fontSize:25,fontWeight:700,margin:'0 0 2px',letterSpacing:1}}>{data.name}</h1>
+            <h1 style={{color:'white',fontSize:25,fontWeight:70,margin:'0 0 2px',letterSpacing:1}}>{data.name}</h1>
             {data.title&&<p style={{color:'rgba(255,255,255,.85)',fontSize:13,margin:'0 0 7px',textTransform:'uppercase',letterSpacing:1.5}}>{data.title}</p>}
           </div>
         </div>
@@ -451,24 +451,24 @@ const T_Sarah = ({data, sections}) => {
   const G='#4a7c59';
   const leftSecs  = sections.filter(s=>s.enabled&&['experience','projects'].includes(s.id));
   const rightSecs = sections.filter(s=>s.enabled&&['education','certifications','skills','languages','hobbies','references'].includes(s.id));
-  const SH={fontSize:11,fontWeight:700,textTransform:'uppercase',letterSpacing:1.5,color:G,borderBottom:`1px solid ${G}`,paddingBottom:3,margin:'15px 0 9px'};
+  const SH={fontSize:11,fontWeight:70,textTransform:'uppercase',letterSpacing:1.5,color:G,borderBottom:`1px solid ${G}`,paddingBottom:3,margin:'15px 0 9px'};
   const SB=({name,pct})=>(<div style={{marginBottom:5}}><p style={{fontSize:11.5,margin:'0 0 2px',color:'#333'}}>{name}</p><div style={{height:5,background:'#e8e8e8',borderRadius:3}}><div style={{width:`${pct}%`,height:'100%',background:G,borderRadius:3}}/></div></div>);
   const lmap={
-    experience: () => (<section><h4 style={SH}>Professional Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',borderBottom:'1px dashed #ddd',paddingBottom:3}}><p style={{fontWeight:700,fontSize:12.5,margin:0,color:'#222'}}>{exp.title}</p><span style={{fontSize:10.5,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:11.5,color:G,margin:'2px 0 4px'}}>{exp.company}</p><ul style={{margin:0,paddingLeft:14}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:11.5,color:'#444',marginBottom:2,lineHeight:1.55}}>{d.trim()}</li>)}</ul></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:700,fontSize:12.5,margin:'0 0 1px'}}>{p.name}</p><p style={{fontSize:11.5,color:'#555',lineHeight:1.55}}>{p.description}</p></div>))}</section>) : null,
+    experience: () => (<section><h4 style={SH}>Professional Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:13}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',borderBottom:'1px dashed #ddd',paddingBottom:3}}><p style={{fontWeight:70,fontSize:12.5,margin:0,color:'#222'}}>{exp.title}</p><span style={{fontSize:10.5,color:'#888'}}>{fmtRange(exp)}</span></div><p style={{fontSize:11.5,color:G,margin:'2px 0 4px'}}>{exp.company}</p><ul style={{margin:0,paddingLeft:14}}>{exp.duties.split('\n').filter(d=>d.trim()).map((d,i)=><li key={i} style={{fontSize:11.5,color:'#444',marginBottom:2,lineHeight:1.55}}>{d.trim()}</li>)}</ul></div>))}</section>),
+    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:9}}><p style={{fontWeight:70,fontSize:12.5,margin:'0 0 1px'}}>{p.name}</p><p style={{fontSize:11.5,color:'#555',lineHeight:1.55}}>{p.description}</p></div>))}</section>) : null,
   };
   const rmap={
-    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{fontWeight:700,fontSize:12,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontSize:11,color:'#666',margin:'0 0 1px'}}>{title}</p><p style={{fontSize:11,color:'#999',margin:0}}>{data.education[key].passingYear}</p></div>))}</section>),
+    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{fontWeight:70,fontSize:12,margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontSize:11,color:'#666',margin:'0 0 1px'}}>{title}</p><p style={{fontSize:11,color:'#999',margin:0}}>{data.education[key].passingYear}</p></div>))}</section>),
     certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=><p key={c.id} style={{fontSize:12,color:'#333',margin:'0 0 3px'}}><strong>{c.name}</strong> — {c.issuer}</p>)}</section>) : null,
     skills: () => (<section><h4 style={SH}>Key Skills</h4>{data.skills.split(',').map((s,i)=><SB key={i} name={s.trim()} pct={60+((i*13)%38)}/>)}</section>),
     languages: () => data.languages?.length ? (<section><h4 style={SH}>Languages</h4>{data.languages.map(l=><p key={l.id||l.lang} style={{fontSize:12,color:'#333',margin:'2px 0'}}>{l.lang} — {l.level}</p>)}</section>) : null,
     hobbies: () => data.hobbies ? (<section><h4 style={SH}>Interests</h4><p style={{fontSize:12,color:'#555'}}>{data.hobbies}</p></section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4>{data.references.map(r=><div key={r.id} style={{marginBottom:5}}><p style={{fontWeight:700,fontSize:12.5,margin:0}}>{r.name}</p><p style={{fontSize:11.5,color:'#666',margin:0}}>{r.company}</p></div>)}</section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4>{data.references.map(r=><div key={r.id} style={{marginBottom:5}}><p style={{fontWeight:70,fontSize:12.5,margin:0}}>{r.name}</p><p style={{fontSize:11.5,color:'#666',margin:0}}>{r.company}</p></div>)}</section>) : null,
   };
   return (
     <div style={{fontFamily:'Georgia,serif',background:'white',minHeight:'297mm',padding:'19px 22px'}}>
       <div style={{textAlign:'center',borderBottom:`2px solid ${G}`,paddingBottom:11,marginBottom:3}}>
-        <h1 style={{fontSize:27,fontWeight:700,color:'#222',margin:'0 0 4px',letterSpacing:1}}>{data.name}</h1>
+        <h1 style={{fontSize:27,fontWeight:70,color:'#222',margin:'0 0 4px',letterSpacing:1}}>{data.name}</h1>
         {data.title&&<p style={{fontSize:14,color:G,margin:'0 0 7px',fontStyle:'italic'}}>{data.title}</p>}
         <div style={{display:'flex',justifyContent:'center',gap:15,flexWrap:'wrap',fontSize:12,color:'#666'}}>
           {data.phone&&<span>{data.phone}</span>}{data.email&&<span>{data.email}</span>}{data.address&&<span>{data.address}</span>}
@@ -484,22 +484,22 @@ const T_Sarah = ({data, sections}) => {
 };
 
 const T_Keith = ({data, sections}) => {
-  const SH={fontSize:14,fontWeight:700,color:'#222',borderBottom:'1px solid #e0e0e0',paddingBottom:5,marginBottom:11,marginTop:19};
+  const SH={fontSize:14,fontWeight:70,color:'#222',borderBottom:'1px solid #e0e0e0',paddingBottom:5,marginBottom:11,marginTop:19};
   const map={
     summary: () => (<section><h4 style={SH}>Profile</h4><p style={{fontSize:13,lineHeight:1.8,color:'#333'}}>{data.summary}</p></section>),
     skills: () => (<section><h4 style={SH}>Top Skills</h4><div style={{display:'flex',flexWrap:'wrap',gap:8}}>{data.skills.split(',').map((s,i)=><span key={i} style={{border:'1px solid #c0c0c0',padding:'4px 13px',borderRadius:20,fontSize:12.5,color:'#333',background:'#f9f9f9'}}>{s.trim()}</span>)}</div></section>),
-    experience: () => (<section><h4 style={SH}>Work Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:17}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:4}}><div><p style={{fontSize:13,color:'#888',margin:'0 0 1px'}}>{exp.company}</p><p style={{fontWeight:700,fontSize:14,color:'#222',margin:0}}>{exp.title}</p></div><span style={{fontSize:11.5,color:'#999',whiteSpace:'nowrap',marginLeft:11}}>{fmtRange(exp)}</span></div><p style={{fontSize:13,color:'#555',lineHeight:1.75,margin:0}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
-    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{fontSize:13,color:'#888',margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontWeight:700,fontSize:13.5,color:'#222',margin:'0 0 1px'}}>{title}</p><p style={{fontSize:12,color:'#999',margin:0}}>{data.education[key].passingYear}</p></div>))}</section>),
-    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:13}}><p style={{fontWeight:700,fontSize:14,color:'#222',margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:13,color:'#555',lineHeight:1.7}}>{p.description}</p></div>))}</section>) : null,
-    certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=>(<div key={c.id} style={{marginBottom:7}}><p style={{fontWeight:700,fontSize:13,color:'#222',margin:'0 0 1px'}}>{c.name}</p><p style={{fontSize:12,color:'#888',margin:0}}>{c.issuer} {c.year&&`· ${c.year}`}</p></div>))}</section>) : null,
-    languages: () => data.languages?.length ? (<section><h4 style={SH}>Languages</h4><div style={{display:'flex',gap:13,flexWrap:'wrap'}}>{data.languages.map(l=>(<div key={l.id||l.lang} style={{background:'#f4f4f4',padding:'5px 13px',borderRadius:6}}><p style={{fontWeight:700,fontSize:13,color:'#222',margin:'0 0 1px'}}>{l.lang}</p><p style={{fontSize:11.5,color:'#888',margin:0}}>{l.level}</p></div>))}</div></section>) : null,
+    experience: () => (<section><h4 style={SH}>Work Experience</h4>{data.experience.map(exp=>(<div key={exp.id} style={{marginBottom:17}}><div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:4}}><div><p style={{fontSize:13,color:'#888',margin:'0 0 1px'}}>{exp.company}</p><p style={{fontWeight:70,fontSize:14,color:'#222',margin:0}}>{exp.title}</p></div><span style={{fontSize:11.5,color:'#999',whiteSpace:'nowrap',marginLeft:11}}>{fmtRange(exp)}</span></div><p style={{fontSize:13,color:'#555',lineHeight:1.75,margin:0}}>{exp.duties.split('\n').filter(d=>d.trim()).join(' ')}</p></div>))}</section>),
+    education: () => (<section><h4 style={SH}>Education</h4>{EDU_LEVELS.map(({key,title})=>data.education[key]?.school&&(<div key={key} style={{marginBottom:9}}><p style={{fontSize:13,color:'#888',margin:'0 0 1px'}}>{data.education[key].school}</p><p style={{fontWeight:70,fontSize:13.5,color:'#222',margin:'0 0 1px'}}>{title}</p><p style={{fontSize:12,color:'#999',margin:0}}>{data.education[key].passingYear}</p></div>))}</section>),
+    projects: () => data.projects?.length ? (<section><h4 style={SH}>Projects</h4>{data.projects.map(p=>(<div key={p.id} style={{marginBottom:13}}><p style={{fontWeight:70,fontSize:14,color:'#222',margin:'0 0 2px'}}>{p.name}</p><p style={{fontSize:13,color:'#555',lineHeight:1.7}}>{p.description}</p></div>))}</section>) : null,
+    certifications: () => data.certifications?.length ? (<section><h4 style={SH}>Certifications</h4>{data.certifications.map(c=>(<div key={c.id} style={{marginBottom:7}}><p style={{fontWeight:70,fontSize:13,color:'#222',margin:'0 0 1px'}}>{c.name}</p><p style={{fontSize:12,color:'#888',margin:0}}>{c.issuer} {c.year&&`· ${c.year}`}</p></div>))}</section>) : null,
+    languages: () => data.languages?.length ? (<section><h4 style={SH}>Languages</h4><div style={{display:'flex',gap:13,flexWrap:'wrap'}}>{data.languages.map(l=>(<div key={l.id||l.lang} style={{background:'#f4f4f4',padding:'5px 13px',borderRadius:6}}><p style={{fontWeight:70,fontSize:13,color:'#222',margin:'0 0 1px'}}>{l.lang}</p><p style={{fontSize:11.5,color:'#888',margin:0}}>{l.level}</p></div>))}</div></section>) : null,
     hobbies: () => data.hobbies ? (<section><h4 style={SH}>Interests</h4><p style={{fontSize:13,color:'#555'}}>{data.hobbies}</p></section>) : null,
-    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4><div style={{display:'flex',gap:15,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id} style={{background:'#f9f9f9',padding:'9px 13px',borderRadius:8,border:'1px solid #e8e8e8'}}><p style={{fontWeight:700,fontSize:13,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p>{r.email&&<p style={{fontSize:11.5,color:'#888',margin:'2px 0 0'}}>{r.email}</p>}</div>))}</div></section>) : null,
+    references: () => data.references?.length ? (<section><h4 style={SH}>References</h4><div style={{display:'flex',gap:15,flexWrap:'wrap'}}>{data.references.map(r=>(<div key={r.id} style={{background:'#f9f9f9',padding:'9px 13px',borderRadius:8,border:'1px solid #e8e8e8'}}><p style={{fontWeight:70,fontSize:13,margin:'0 0 2px'}}>{r.name}</p><p style={{fontSize:12,color:'#666',margin:0}}>{r.title}{r.company&&`, ${r.company}`}</p>{r.email&&<p style={{fontSize:11.5,color:'#888',margin:'2px 0 0'}}>{r.email}</p>}</div>))}</div></section>) : null,
   };
   return (
     <div style={{fontFamily:'"Segoe UI",Arial,sans-serif',background:'white',minHeight:'297mm'}}>
       <div style={{background:'#fff',borderBottom:'3px solid #e0e0e0',padding:'19px 26px'}}>
-        <h1 style={{fontSize:23,fontWeight:700,color:'#222',margin:'0 0 3px'}}>{data.name}</h1>
+        <h1 style={{fontSize:23,fontWeight:70,color:'#222',margin:'0 0 3px'}}>{data.name}</h1>
         <p style={{fontSize:13,color:'#777',margin:'0 0 7px'}}>{[data.address,data.phone,data.email].filter(Boolean).join(' · ')}</p>
         {data.title&&<p style={{fontSize:13.5,color:'#444',lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic',borderLeft:'3px solid #1565c0',paddingLeft:9}}>{data.title}</p>}
         {data.linkedin&&<p style={{fontSize:12,color:'#1565c0',margin:0}}>{data.linkedin}</p>}
@@ -582,7 +582,7 @@ const SecMgr = ({sections,setSections}) => {
           <span style={{color:'rgba(200,200,220,.28)',fontSize:'.83rem'}}>⠿</span>
           <span style={{fontSize:'.95rem'}}>{s.icon}</span>
           <span style={{flex:1,fontSize:'.75rem',fontWeight:600,color:s.enabled?'rgba(220,215,255,.85)':'rgba(180,180,200,.38)'}}>{s.label}</span>
-          <button onClick={()=>toggle(s.id)} style={{padding:'.16rem .58rem',borderRadius:20,fontSize:'.62rem',fontWeight:700,cursor:'pointer',fontFamily:'inherit',
+          <button onClick={()=>toggle(s.id)} style={{padding:'.16rem .58rem',borderRadius:20,fontSize:'.62rem',fontWeight:70,cursor:'pointer',fontFamily:'inherit',
             border:s.enabled?'1px solid rgba(0,229,200,.38)':'1px solid rgba(255,255,255,.13)',
             background:s.enabled?'rgba(0,229,200,.11)':'rgba(255,255,255,.04)',
             color:s.enabled?'#00e5c8':'rgba(200,200,220,.38)'}}>
@@ -706,7 +706,7 @@ function ResumeBuilder({user}) {
                     onMouseEnter={e=>{ if(tpl!==t.id) e.currentTarget.style.borderColor='rgba(255,255,255,.22)'; }}
                     onMouseLeave={e=>{ if(tpl!==t.id) e.currentTarget.style.borderColor='rgba(255,255,255,.08)'; }}>
                     <span style={{fontSize:'1.15rem'}}>{t.icon}</span>
-                    <span style={{fontSize:'.62rem',fontWeight:700,color:tpl===t.id?'#c4b5fd':'rgba(232,232,240,.52)',lineHeight:1.2,marginTop:1}}>{t.name}</span>
+                    <span style={{fontSize:'.62rem',fontWeight:70,color:tpl===t.id?'#c4b5fd':'rgba(232,232,240,.52)',lineHeight:1.2,marginTop:1}}>{t.name}</span>
                   </button>
                 ))}
               </div>
@@ -774,7 +774,7 @@ function ResumeBuilder({user}) {
                 <div className="t-card-title">Education</div>
                 {EDU_LEVELS.map(({key,title})=>(
                   <div key={key} style={{background:'rgba(255,255,255,.03)',border:'1px solid rgba(255,255,255,.07)',borderRadius:12,padding:'1rem',marginBottom:'.6rem'}}>
-                    <p style={{margin:'0 0 .6rem',fontSize:'.69rem',fontWeight:700,color:'rgba(0,229,200,.6)',letterSpacing:'.08em',textTransform:'uppercase'}}>{title}</p>
+                    <p style={{margin:'0 0 .6rem',fontSize:'.69rem',fontWeight:70,color:'rgba(0,229,200,.6)',letterSpacing:'.08em',textTransform:'uppercase'}}>{title}</p>
                     <input className="t-input" placeholder="School / University" name="school" value={data.education[key].school} onChange={e=>hStr(key,e,'education')} style={{marginBottom:'.52rem'}}/>
                     <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'.52rem'}}>
                       <input className="t-input" placeholder="Percentage / CGPA" name="percentage" value={data.education[key].percentage} onChange={e=>hStr(key,e,'education')}/>
@@ -866,7 +866,7 @@ function ResumeBuilder({user}) {
                 </p>
               </div>
               <div style={{display:'flex',alignItems:'center',gap:'.7rem'}}>
-                <button onClick={()=>{ setIsEditMode(v=>{ _editMode=!v; return !v; }); }} style={{padding:'.3rem .75rem',borderRadius:20,cursor:'pointer',fontFamily:'inherit',fontSize:'.68rem',fontWeight:700,
+                <button onClick={()=>{ setIsEditMode(v=>{ _editMode=!v; return !v; }); }} style={{padding:'.3rem .75rem',borderRadius:20,cursor:'pointer',fontFamily:'inherit',fontSize:'.68rem',fontWeight:70,
                   border:`1px solid ${isEditMode?'rgba(0,229,200,.45)':'rgba(255,255,255,.15)'}`,
                   background:isEditMode?'rgba(0,229,200,.1)':'rgba(255,255,255,.05)',
                   color:isEditMode?'#00e5c8':'rgba(200,200,220,.45)'}}>
@@ -887,7 +887,7 @@ function ResumeBuilder({user}) {
                 <span style={{flex:1,textAlign:'center',fontSize:'.58rem',color:'rgba(255,255,255,.16)',fontFamily:'monospace'}}>
                   {data.name.replace(/ /g,'_')}_{tpl}.pdf
                 </span>
-                {isEditMode&&<span style={{fontSize:'.6rem',color:'rgba(124,107,255,.8)',background:'rgba(124,107,255,.13)',border:'1px solid rgba(124,107,255,.3)',borderRadius:10,padding:'1px 7px',fontWeight:700,letterSpacing:'.3px'}}>✏ DRAG ACTIVE</span>}
+                {isEditMode&&<span style={{fontSize:'.6rem',color:'rgba(124,107,255,.8)',background:'rgba(124,107,255,.13)',border:'1px solid rgba(124,107,255,.3)',borderRadius:10,padding:'1px 7px',fontWeight:70,letterSpacing:'.3px'}}>✏ DRAG ACTIVE</span>}
               </div>
               <div ref={ref} style={{width:'100%',minHeight:'297mm',background:'white',color:'#000'}}>
                 <Tpl data={data} sections={sections}/>

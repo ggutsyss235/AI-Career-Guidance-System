@@ -107,17 +107,7 @@ AICareer Pro offers tools for:
 - ADZUNA_LOCATION = in (You can set default loaction)
 
 
-## Installation
 
-### Prerequisites
-- Node.js 18+
-- Python 3.9+
-- npm
-- Git
-- Ollama(It is important to generate cover letter, mock interview questions....You can read the OLLAMA_SETUP.md file)
-
-### Clone Repository
-    git clone https://github.com/vaibhavagarwal46/AICareer-Pro---Career-Guidance-System
 
 ### Frontend Setup
     cd frontend
@@ -133,16 +123,7 @@ AICareer Pro offers tools for:
     python app.py
 
 ### Database Setup 
-    Open another terminal and run "mongod"
-
-### Ollama Connection
-    Open another terminal and run "ollama serve"      
-
-## Author
-
-- Vaibhav Agarwal  
-- GitHub:- https://github.com/vaibahvagarwal46 
-- LinkedIn:- https://linkedin.com/in/vaibhavagarwal46     
+    Open another terminal and run "mongod" 
 
 
 

@@ -144,7 +144,7 @@ const PortfolioGenerator = () => {
             <>
               <div className="t-card-title">General Info & Stats</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                {inp('Full Name *', userData.name, v => hd('name', v), 'text', 'e.g. Vaibhav Agarwal')}
+                {inp('Full Name *', userData.name, v => hd('name', v), 'text', 'e.g. SPARSH SHANKHDHAR')}
                 {inp('Professional Role *', userData.role, v => hd('role', v), 'text', 'e.g. Software Engineer')}
               </div>
               <div className="t-group">
@@ -197,7 +197,7 @@ const PortfolioGenerator = () => {
                 </div>
               </div>
               
-              <div style={{ textAlign: 'right', marginTop: '1rem' }}>
+              <div style={{ textAlign: 'right', marginTop: '10rem' }}>
                 <button className="t-btn t-btn-primary" style={{ width: 'auto' }} onClick={() => setStep(2)}>
                   Next <FaArrowRight />
                 </button>
@@ -208,7 +208,7 @@ const PortfolioGenerator = () => {
           {step === 2 && (
             <>
               <div className="t-card-title">Education History</div>
-              <p style={{ color: 'rgba(232,232,240,.6)', fontSize: '.9rem', marginBottom: '1rem' }}>
+              <p style={{ color: 'rgba(232,232,240,.6)', fontSize: '.9rem', marginBottom: '10rem' }}>
                 Fill in your education details. Leave blank to skip any level.
               </p>
               {userData.education.map((edu, i) => (
@@ -229,7 +229,7 @@ const PortfolioGenerator = () => {
           {step === 3 && (
             <>
               <div className="t-card-title">Technical Skills</div>
-              <p style={{ color: 'rgba(232,232,240,.6)', fontSize: '.9rem', marginBottom: '1rem' }}>
+              <p style={{ color: 'rgba(232,232,240,.6)', fontSize: '9rem', marginBottom: '10rem' }}>
                 Add your skills and rate your proficiency level.
               </p>
               {userData.skills.map((s, i) => (
@@ -333,4 +333,5 @@ const PortfolioGenerator = () => {
     </div>
   );
 };
+
 export default PortfolioGenerator;

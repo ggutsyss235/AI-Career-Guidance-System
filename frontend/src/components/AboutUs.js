@@ -180,7 +180,7 @@ function AboutUs() {
         <div className="abt-team-card">
           <div className="abt-team-info">
             <div className="abt-team-role">Creator & Developer</div>
-            <h3>Vaibhav Agarwal</h3>
+            <h3>SPARSH SHANKHDHAR</h3>
             <p>Designed and built AICareer Pro as a full-stack AI platform combining Flask, React, Machine Learning, and Ollama LLM integration to deliver an end-to-end career guidance experience.</p>
           </div>
         </div>

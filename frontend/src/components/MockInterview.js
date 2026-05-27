@@ -29,6 +29,7 @@ const MockInterview = () => {
       setIsListening(false);
     } else {
       const rec = new SR();
+      
       rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
       rec.onstart   = () => setIsListening(true);
       rec.onresult  = (e) => {
@@ -40,6 +41,7 @@ const MockInterview = () => {
       rec.onerror   = () => setIsListening(false);
       rec.onend     = () => setIsListening(false);
       recognitionRef.current = rec;
+
       rec.start();
     }
   };
@@ -61,6 +63,7 @@ const MockInterview = () => {
     { name: 'QA/Testing',             icon: <FaCheckCircle /> },
     { name: 'Java Developer',         icon: <FaCode /> },
     { name: 'Python Developer',       icon: <FaCode /> },
+
     { name: 'JavaScript Developer',   icon: <FaCode /> },
     { name: 'UI/UX Design',           icon: <FaPencilAlt /> },
     { name: 'Blockchain Developer',   icon: <FaCode /> },
@@ -69,10 +72,12 @@ const MockInterview = () => {
   const startInterview = async (selectedField) => {
     setField(selectedField);
     setLoading(true);
+
     try {
       const res = await axios.post('http://localhost:5000/mock-interview', { action: 'get_question', field: selectedField });
       setQuestion(res.data.question);
       setStep('interview');
+
     } catch {
       alert('Backend error! Make sure the Ollama server and Flask are running.');
     }
@@ -80,7 +85,11 @@ const MockInterview = () => {
   };
 
   const handleEvaluation = async () => {
+
     setLoading(true);
+
+
+
     try {
       const res = await axios.post('http://localhost:5000/mock-interview', { action: 'evaluate', field, question, answer });
       setFeedback(res.data);
@@ -119,6 +128,9 @@ const MockInterview = () => {
                 <div className="t-spinner t-spinner-accent t-spinner-lg" />
                 <span>Loading your interview question…</span>
               </div>
+
+
+
             ) : (
               <div className="t-grid-4">
                 {fields.map((f) => (
@@ -138,14 +150,9 @@ const MockInterview = () => {
               <button className="t-btn t-btn-outline t-btn-sm" onClick={resetInterview}>✕ Exit</button>
             </div>
 
-            <div className="t-card">
-              <div className="t-card-title">Interview Question</div>
-              <div style={{ background: 'rgba(124,107,255,.08)', border: '1px solid rgba(124,107,255,.25)',
-                borderLeft: '4px solid #7c6bff', borderRadius: '12px', padding: '1.25rem 1.5rem',
-                color: '#e8e8f0', fontSize: '1.05rem', lineHeight: 1.65 }}>
-                {question}
-              </div>
-            </div>
+
+
+
 
             <div className="t-card">
               <div className="t-card-title">Your Answer</div>
@@ -215,15 +222,6 @@ const MockInterview = () => {
                 </div>
               </div>
             )}
-
-            <div className="t-flex-center t-mt2" style={{ gap: '1rem' }}>
-              <button className="t-btn t-btn-outline t-btn-lg" style={{ flex: 1 }} onClick={resetInterview}>
-                Try Another Field
-              </button>
-              <button className="t-btn t-btn-primary t-btn-lg" style={{ flex: 1 }} onClick={() => startInterview(field)}>
-                Next Question
-              </button>
-            </div>
           </div>
         )}
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, ListGroup, Badge, Accordion } from 'react-bootstrap';
-import { FaArrowAltCircleRight, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { Card, Badge, Accordion } from 'react-bootstrap';
+import { FaArrowAltCircleRight, FaExclamationTriangle } from 'react-icons/fa';
 
 const LearningRoadmap = ({ roadmap, career }) => {
   if (!roadmap || roadmap.length === 0) 

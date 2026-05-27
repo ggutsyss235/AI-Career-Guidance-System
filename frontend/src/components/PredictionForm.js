@@ -71,7 +71,7 @@ function PredictionForm({ user }) {
     }];
     
     return { labels: skillsList, datasets };
-  }, [formData, gapData, prediction]);
+  }, [formData, gapData]);
 
   const chartOptions = {
     responsive: true, maintainAspectRatio: false,

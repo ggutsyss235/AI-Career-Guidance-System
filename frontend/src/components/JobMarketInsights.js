@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaBriefcase, FaExternalLinkAlt, FaChartLine, FaMapMarkerAlt, FaDollarSign } from 'react-icons/fa';
+import { FaBriefcase, FaExternalLinkAlt, FaMapMarkerAlt, FaDollarSign } from 'react-icons/fa';
 import axios from 'axios';
 import { injectTheme } from './theme';
 import { API_URL } from '../config';

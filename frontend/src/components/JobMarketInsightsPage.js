@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaChartLine, FaArrowLeft, FaSearch } from 'react-icons/fa';
+import { FaArrowLeft, FaSearch } from 'react-icons/fa';
 import JobMarketInsights from './JobMarketInsights';
 import { injectTheme } from './theme';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {FaMagic, FaArrowRight, FaArrowLeft, FaCheckCircle} from 'react-icons/fa';
+import {FaArrowRight, FaArrowLeft} from 'react-icons/fa';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { injectTheme } from './theme';

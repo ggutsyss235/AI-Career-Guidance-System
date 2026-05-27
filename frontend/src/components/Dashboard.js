@@ -580,7 +580,7 @@ function Dashboard({ user }) {
       </div>
 
       <div className="cai-footer">
-        <p>© {new Date().getFullYear()} AICareer Pro Created by Vaibhav Agarwal</p>
+        <p>© {new Date().getFullYear()} AICareer Pro — Sparsh Shankhdhar</p>
       </div>
     </div>
   );

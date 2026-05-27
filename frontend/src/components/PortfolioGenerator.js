@@ -3,6 +3,7 @@ import {FaMagic, FaArrowRight, FaArrowLeft, FaCheckCircle} from 'react-icons/fa'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { injectTheme } from './theme';
+import { API_URL } from '../config';
 
 const STEPS = [
   { n: 1, label: 'General Info' },
@@ -88,7 +89,7 @@ const PortfolioGenerator = () => {
     userData.projects.forEach((p, i) => { if (p.image) fd.append(`projectImage_${i}`, p.image); });
     
     try {
-      const res = await axios.post('http://localhost:5000/generate-portfolio', fd, {
+      const res = await axios.post(`${API_URL}/generate-portfolio`, fd, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setGeneratedCode(res.data.html);

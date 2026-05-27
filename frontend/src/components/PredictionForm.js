@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import LearningRoadmap from './LearningRoadmap';
@@ -33,7 +34,7 @@ function PredictionForm({ user }) {
 
   useEffect(() => { injectTheme(); }, []);
 
-  const API_URL = 'http://localhost:5000';
+  // API_URL is imported from config.js at the top of the file
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

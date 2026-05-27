@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaBriefcase, FaExternalLinkAlt, FaChartLine, FaMapMarkerAlt, FaDollarSign } from 'react-icons/fa';
 import axios from 'axios';
 import { injectTheme } from './theme';
+import { API_URL } from '../config';
 
 const LOCATIONS = [
   { value: 'us', label: 'United States' },
@@ -26,7 +27,7 @@ const JobMarketInsights = ({ predictedRole }) => {
     const fetchJobs = async () => {
       setLoading(true); setError(null);
       try {
-        const res = await axios.post('http://localhost:5000/job-insights', { role: predictedRole, location });
+        const res = await axios.post(`${API_URL}/job-insights`, { role: predictedRole, location });
         setJobs(res.data.listings || []);
         if (res.data.listings.length === 0)
           setError(`No job listings found for "${predictedRole}" in the selected location.`);

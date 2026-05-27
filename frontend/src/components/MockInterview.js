@@ -3,6 +3,7 @@ import {FaCode, FaDatabase, FaShieldAlt, FaBrain, FaNetworkWired, FaMicrophone,F
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { injectTheme } from './theme';
+import { API_URL } from '../config';
 
 const MockInterview = () => {
   const [field, setField]       = useState('');
@@ -74,7 +75,7 @@ const MockInterview = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/mock-interview', { action: 'get_question', field: selectedField });
+      const res = await axios.post(`${API_URL}/mock-interview`, { action: 'get_question', field: selectedField });
       setQuestion(res.data.question);
       setStep('interview');
 
@@ -91,7 +92,7 @@ const MockInterview = () => {
 
 
     try {
-      const res = await axios.post('http://localhost:5000/mock-interview', { action: 'evaluate', field, question, answer });
+      const res = await axios.post(`${API_URL}/mock-interview`, { action: 'evaluate', field, question, answer });
       setFeedback(res.data);
       setStep('result');
     } catch {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { injectTheme } from './theme';
 
-const API_URL = 'http://localhost:5000';
+import { API_URL } from '../config';
 
 function CoverLetterGenerator({ user }) {
   const [jobDescription, setJobDescription] = useState('');

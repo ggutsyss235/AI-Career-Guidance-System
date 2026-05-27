@@ -3,6 +3,7 @@ import { FaPaste, FaFileUpload, FaArrowLeft, FaInfoCircle, FaMagic, FaUserTie, F
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { injectTheme } from './theme';
+import { API_URL } from '../config';
 
 const LinkedInAuditorPage = () => {
   const [inputText, setInputText]   = useState('');
@@ -23,7 +24,7 @@ const LinkedInAuditorPage = () => {
     setLoading(true);
     setResult(null);
     try {
-      const res = await axios.post('http://localhost:5000/audit-linkedin', {
+      const res = await axios.post(`${API_URL}/audit-linkedin`, {
         content: inputText,
         career: targetRole,
         type: activeTab,

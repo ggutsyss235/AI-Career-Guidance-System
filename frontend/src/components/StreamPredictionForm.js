@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { injectTheme } from './theme';
 import { FaArrowLeft} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config';
 
 const StreamPredictionForm = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const StreamPredictionForm = () => {
     setError(null);
     setPrediction(null);
     try {
-      const response = await fetch('http://localhost:5000/api/predict_stream', {
+      const response = await fetch(`${API_URL}/api/predict_stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

@@ -3,7 +3,10 @@ from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
 from flask_bcrypt import Bcrypt
 import pickle
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    np = None
 import os
 import sys
 from datetime import datetime, timezone
@@ -13,7 +16,10 @@ import joblib
 import requests
 from dotenv import load_dotenv
 import random
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
 import time
 from werkzeug.utils import secure_filename
 import warnings
@@ -163,7 +169,10 @@ class MockCareerModel:
         for role, ideal_vector in IDEAL_SKILLS_DATA.items():
             if role == "Default Career":
                 continue
-            distance = np.sqrt(np.sum((np.array(vector) - np.array(ideal_vector)) ** 2))
+            try:
+                distance = np.sqrt(np.sum((np.array(vector) - np.array(ideal_vector)) ** 2))
+            except (NameError, TypeError, Exception):
+                distance = sum((v - i) ** 2 for v, i in zip(vector, ideal_vector)) ** 0.5
             if distance < min_distance:
                 min_distance = distance
                 best_role = role
@@ -190,7 +199,10 @@ class MockStreamModel:
     def __init__(self):
         pass
     def predict(self, df):
-        row = df.iloc[0]
+        if hasattr(df, 'iloc'):
+            row = df.iloc[0]
+        else:
+            row = df
         math = float(row.get('math_marks', 0))
         science = float(row.get('science_marks', 0))
         social = float(row.get('social_marks', 0))
@@ -697,7 +709,10 @@ def predict_stream():
             'creative_score': int(data.get('creative_score', 0)),
             'leadership_score': int(data.get('leadership_score', 0))
         }
-        input_df = pd.DataFrame([input_data])
+        if pd is not None:
+            input_df = pd.DataFrame([input_data])
+        else:
+            input_df = input_data
 
     except (ValueError, TypeError) as e:
         return jsonify({'error': f'Invalid input data: {str(e)}'}), 400

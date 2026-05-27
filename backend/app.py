@@ -1318,7 +1318,6 @@ def generate_portfolio():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
-
 if __name__ == '__main__':
     if model is None:
         print("WARNING: Prediction Model failed to load")
@@ -1328,4 +1327,5 @@ if __name__ == '__main__':
         print("  1) - Ollama: Ready (llama3.2:1b)")
         print("  2) - MongoDB: Connected")
         print("  3) - Prediction Model: Loaded")
-    app.run(debug=True, port=5000, use_reloader=False)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)

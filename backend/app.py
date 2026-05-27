@@ -19,8 +19,11 @@ from werkzeug.utils import secure_filename
 import warnings
 import base64
 import io
-from sklearn.exceptions import InconsistentVersionWarning
-warnings.filterwarnings("ignore", category=InconsistentVersionWarning) 
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+    warnings.filterwarnings("ignore", category=InconsistentVersionWarning) 
+except ImportError:
+    pass
 
 # LOADING MOCKS AND FALLBACK CLASSES ->
 
